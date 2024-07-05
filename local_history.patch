@@ -1,0 +1,55 @@
+Index: src/main/java/com/checkList_Project/Aplication/models/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/checkList_Project/Aplication/models/User.java b/src/main/java/com/checkList_Project/Aplication/models/User.java
+--- a/src/main/java/com/checkList_Project/Aplication/models/User.java	
++++ b/src/main/java/com/checkList_Project/Aplication/models/User.java	(date 1720135249395)
+@@ -21,7 +21,7 @@
+     private Long id;
+     @Column(unique = true, nullable = false, length = 100)
+     private String user;
+-    @Column(unique = true, nullable = false, length = 100)
++    @Column(nullable = false, length = 100)
+     private String password;
+ 
+     public Long getId() {
+Index: src/main/java/com/checkList_Project/Aplication/controllers/UserController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/checkList_Project/Aplication/controllers/UserController.java b/src/main/java/com/checkList_Project/Aplication/controllers/UserController.java
+--- a/src/main/java/com/checkList_Project/Aplication/controllers/UserController.java	
++++ b/src/main/java/com/checkList_Project/Aplication/controllers/UserController.java	(date 1720137307742)
+@@ -33,7 +33,7 @@
+     }
+ 
+ 
+-    @PostMapping
++    @PostMapping("/user")
+     @Validated
+     public ResponseEntity<Void> create(@Valid @RequestBody User obj){
+         this.userService.save(obj);
+@@ -42,13 +42,13 @@
+         return ResponseEntity.created(uri).build();
+     }
+ 
+-//    @PutMapping("/{id}")
+-//    @Validated
+-//    public ResponseEntity<Void> updateUser(@Valid @RequestBody User obj, @PathVariable Long id){
+-//        obj.setId(id);
+-//        this.userService.updateUser(id);
+-//        return ResponseEntity.noContent().build();
+-//    }
++    @PutMapping("/{id}")
++    @Validated
++    public ResponseEntity<Void> updateUser(@Valid @RequestBody User obj, @PathVariable Long id){
++        obj.setId(id);
++        this.userService.update(id);
++        return ResponseEntity.noContent().build();
++    }
+ 
+     @DeleteMapping("/{id}")
+ public ResponseEntity<Void> delete(@PathVariable Long id){
